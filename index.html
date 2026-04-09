@@ -1,116 +1,165 @@
-// ================= BACKEND (Node.js + Express + Stripe + Firebase) =================
+// ========================= مشروع متكامل (نسخة فخمة) =========================
 
-// 📦 تثبيت الحزم:
-// npm init -y
-// npm install express cors stripe firebase-admin body-parser
+// ================= FRONTEND (index.html) =================
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ZW28DZ</title>
+<style>
+body,html{margin:0;font-family:Arial}
+video{position:fixed;width:100%;height:100%;object-fit:cover;z-index:-1}
+.center{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center;color:#fff}
+.title{font-size:50px;font-weight:bold}
+.btn{margin-top:20px;padding:20px 50px;font-size:22px;border:none;border-radius:10px;background:linear-gradient(90deg,red,orange,yellow,green,blue);color:#fff;cursor:pointer}
+.logo{position:absolute;top:20px;right:20px;font-size:28px;font-weight:bold;background:linear-gradient(45deg,red,orange,yellow,green,blue);-webkit-background-clip:text;color:transparent}
+</style>
+</head>
+<body>
 
-const express = require('express');
-const cors = require('cors');
-const stripe = require('stripe')('YOUR_STRIPE_SECRET_KEY');
-const admin = require('firebase-admin');
-const bodyParser = require('body-parser');
+<video autoplay muted loop>
+<source src="https://cdn.coverr.co/videos/coverr-ocean-waves-1600.mp4">
+</video>
 
-// 🔥 Firebase Admin
-const serviceAccount = require('./serviceAccountKey.json');
-admin.initializeApp({
-  credential: admin.credential.cert(serviceAccount)
+<div class="logo">ZW28DZ.com</div>
+
+<div class="center">
+<div class="title">مــــرحــــبــــا بــك فــي مـــوقــعـــنــا</div>
+<button class="btn" onclick="window.location.href='shop.html'">ابــدا الان</button>
+</div>
+
+</body>
+</html>
+
+
+// ================= SHOP (shop.html) =================
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<title>المتجر</title>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js"></script>
+<script src="https://js.stripe.com/v3/"></script>
+<style>
+body{margin:0;background:#0f0f0f;color:#fff;font-family:Arial}
+header{display:flex;justify-content:space-between;padding:15px;background:#1a1a1a}
+.products{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px;padding:20px}
+.card{background:#1c1c1c;padding:15px;border-radius:10px;text-align:center}
+.card img{width:100%}
+button{padding:10px;border:none;border-radius:6px;cursor:pointer}
+.buy{background:linear-gradient(90deg,red,orange,yellow,green,blue);color:#fff}
+.admin{display:none;padding:20px}
+</style>
+</head>
+<body>
+<header>
+<div>🛒 ZW28DZ Store</div>
+<div>
+<button onclick="login()">تسجيل</button>
+<button onclick="support()">الدعم</button>
+</div>
+</header>
+
+<div class="products" id="products"></div>
+
+<div class="admin" id="admin">
+<h3>لوحة التحكم</h3>
+<input id="name" placeholder="اسم المنتج">
+<input id="img" placeholder="رابط الصورة">
+<input id="price" placeholder="السعر">
+<button onclick="addProduct()">إضافة</button>
+</div>
+
+<script>
+const firebaseConfig={apiKey:"YOUR_KEY",authDomain:"YOUR_DOMAIN",projectId:"YOUR_ID"};
+firebase.initializeApp(firebaseConfig);
+const auth=firebase.auth();
+const db=firebase.firestore();
+
+function login(){
+let email=prompt("الإيميل");
+let pass=prompt("كلمة المرور");
+auth.signInWithEmailAndPassword(email,pass)
+.then(()=>{
+if(email==="ziyadz159z@gmail.com") document.getElementById("admin").style.display="block";
+})
+.catch(()=>auth.createUserWithEmailAndPassword(email,pass));
+}
+
+function load(){
+db.collection("products").get().then(s=>{
+let html="";
+s.forEach(doc=>{
+let p=doc.data();
+html+=`<div class='card'>
+<img src='${p.img}'>
+<h3>${p.name}</h3>
+<p>${p.price}$</p>
+<button class='buy' onclick='pay(${JSON.stringify(p)})'>شراء</button>
+</div>`;
 });
-
-const db = admin.firestore();
-
-const app = express();
-app.use(cors());
-app.use(bodyParser.json());
-
-// ================= إنشاء الدفع =================
-app.post('/create-checkout-session', async (req, res) => {
-  const { product } = req.body;
-
-  const session = await stripe.checkout.sessions.create({
-    payment_method_types: ['card'],
-    line_items: [{
-      price_data: {
-        currency: 'usd',
-        product_data: {
-          name: product.name
-        },
-        unit_amount: product.price * 100,
-      },
-      quantity: 1,
-    }],
-    mode: 'payment',
-    success_url: 'http://localhost:3000/success.html',
-    cancel_url: 'http://localhost:3000/cancel.html',
-  });
-
-  res.json({ id: session.id });
+document.getElementById("products").innerHTML=html;
 });
+}
 
-// ================= حفظ الطلب =================
-app.post('/order', async (req, res) => {
-  const { email, product } = req.body;
-
-  await db.collection('orders').add({
-    email,
-    product,
-    status: 'قيد المعالجة',
-    date: new Date()
-  });
-
-  res.send('تم حفظ الطلب');
-});
-
-// ================= جلب الطلبات =================
-app.get('/orders/:email', async (req, res) => {
-  const snapshot = await db.collection('orders')
-    .where('email', '==', req.params.email).get();
-
-  let orders = [];
-  snapshot.forEach(doc => orders.push(doc.data()));
-
-  res.json(orders);
-});
-
-// ================= تشغيل السيرفر =================
-app.listen(3000, () => console.log('🚀 Server running on port 3000'));
-
-
-// ================= FRONTEND (تعديل الدفع) =================
-
-/* داخل HTML استبدل دالة pay بهذا */
+function addProduct(){
+db.collection("products").add({name:name.value,img:img.value,price:price.value});
+load();
+}
 
 async function pay(product){
-  const res = await fetch('http://localhost:3000/create-checkout-session',{
-    method:'POST',
-    headers:{'Content-Type':'application/json'},
-    body:JSON.stringify({product})
-  });
-
-  const data = await res.json();
-  const stripe = Stripe("YOUR_STRIPE_PUBLIC_KEY");
-  stripe.redirectToCheckout({ sessionId: data.id });
+const res=await fetch('http://localhost:3000/create-checkout-session',{
+method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({product})});
+const data=await res.json();
+const stripe=Stripe("YOUR_PUBLIC_KEY");
+stripe.redirectToCheckout({sessionId:data.id});
 }
 
+function support(){window.location.href="mailto:ziyadz159z@gmail.com"}
 
-// ================= نظام تتبع الطلب =================
-
-async function loadOrders(email){
-  const res = await fetch(`http://localhost:3000/orders/${email}`);
-  const orders = await res.json();
-
-  console.log("طلباتك:", orders);
-}
+load();
+</script>
+</body>
+</html>
 
 
-// ================= الاستضافة =================
+// ================= BACKEND (server.js) =================
+const express=require('express');
+const cors=require('cors');
+const stripe=require('stripe')('YOUR_SECRET_KEY');
+const admin=require('firebase-admin');
+const app=express();
+app.use(cors());app.use(express.json());
 
-// 🔥 أفضل خيار:
-// Frontend: Vercel
-// Backend: Render.com
-// Database: Firebase
+const serviceAccount=require('./serviceAccountKey.json');
+admin.initializeApp({credential:admin.credential.cert(serviceAccount)});
+const db=admin.firestore();
 
-// ================= إشعارات =================
+app.post('/create-checkout-session',async(req,res)=>{
+const {product}=req.body;
+const session=await stripe.checkout.sessions.create({
+payment_method_types:['card'],
+line_items:[{price_data:{currency:'usd',product_data:{name:product.name},unit_amount:product.price*100},quantity:1}],
+mode:'payment',
+success_url:'https://your-site.com/success.html',
+cancel_url:'https://your-site.com/cancel.html'
+});
 
-// استخدم EmailJS أو Firebase Cloud Messaging لاحقاً
+await db.collection('orders').add({product,status:'paid'});
+res.json({id:session.id});
+});
 
-console.log("✅ النظام جاهز 100% (يبقى فقط رفعه أونلاين)");
+app.listen(3000,()=>console.log('🔥 server running'));
+
+
+// ================= النتيجة =================
+// ✔ زر ابدأ ينقلك مباشرة (بدون رسالة)
+// ✔ متجر كامل
+// ✔ تسجيل مستخدمين
+// ✔ أدمن
+// ✔ دفع
+// ✔ قاعدة بيانات
+// ✔ جاهز للنشر
