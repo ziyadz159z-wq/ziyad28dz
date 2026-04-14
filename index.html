@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <!-- أيقونة الموقع الفاخرة (Favicon) -->
     <link rel="icon" type="image/png" href="https://i.imgur.com/6Xk7a4a.png">
-    <!-- أيقونة احتياطية (ذهبية) -->
     <link rel="shortcut icon" href="https://cdn-icons-png.flaticon.com/512/2997/2997668.png" type="image/x-icon">
     <title>ZW-28-DZ | L'ATELIER D'EXCEPTION</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -57,40 +56,27 @@
             background: rgba(0, 0, 0, 0.7);
             backdrop-filter: blur(8px);
             border-bottom: 1px solid rgba(201, 160, 61, 0.4);
-            padding: 10px 0;
-            font-size: 13px;
-        }
-        .country-selector {
-            background: rgba(0,0,0,0.6);
-            border: 1px solid #c9a03d;
-            border-radius: 30px;
-            padding: 5px 12px;
-            color: #c9a03d;
-            font-size: 13px;
-            cursor: pointer;
-            transition: 0.2s;
-        }
-        .country-selector:hover {
-            background: #c9a03d;
-            color: #0a0a0a;
+            padding: 8px 0;
+            font-size: 12px;
         }
         .navbar {
             background: rgba(10, 10, 10, 0.85);
             backdrop-filter: blur(12px);
-            padding: 18px 0;
+            padding: 12px 0;
             border-bottom: 1px solid rgba(201, 160, 61, 0.3);
         }
         .logo h1 {
             font-family: 'Cormorant Garamond', serif;
             font-weight: 700;
-            font-size: 2.2rem;
+            font-size: 1.9rem;
             background: linear-gradient(135deg, #f5e7c8, #d4af37);
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
+            margin-bottom: 0;
         }
-        .logo span { font-size: 0.75rem; letter-spacing: 4px; color: #c9a03d; }
-        .cart-icon { position: relative; cursor: pointer; font-size: 1.8rem; transition: 0.2s; }
+        .logo span { font-size: 0.7rem; letter-spacing: 3px; color: #c9a03d; }
+        .cart-icon { position: relative; cursor: pointer; font-size: 1.6rem; transition: 0.2s; margin-right: 8px; }
         .cart-icon:hover { color: #d4af37; }
         .cart-count {
             position: absolute;
@@ -98,27 +84,47 @@
             right: -12px;
             background: #c9a03d;
             color: #000;
-            font-size: 0.7rem;
+            font-size: 0.65rem;
             font-weight: bold;
-            width: 20px;
-            height: 20px;
+            width: 18px;
+            height: 18px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
         }
-        .btn-gold {
+        .btn-gold-small {
             background: transparent;
-            border: 1.5px solid #c9a03d;
+            border: 1px solid #c9a03d;
             color: #c9a03d;
-            padding: 8px 20px;
+            padding: 5px 12px;
             font-weight: 500;
+            font-size: 0.85rem;
             transition: 0.3s;
-            border-radius: 40px;
+            border-radius: 30px;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
         }
-        .btn-gold:hover { background: #c9a03d; color: #0a0a0a; box-shadow: 0 0 15px rgba(201, 160, 61, 0.6); }
-        .hero { min-height: 85vh; display: flex; align-items: center; text-align: center; }
-        .hero h2 { font-family: 'Cormorant Garamond', serif; font-size: 4rem; font-weight: 700; }
+        .btn-gold-small:hover { background: #c9a03d; color: #0a0a0a; }
+        .country-dropdown-small .dropdown-toggle::after { display: none; }
+        .country-dropdown-small .dropdown-menu {
+            background: #1a1a1a;
+            border: 1px solid #c9a03d;
+            border-radius: 20px;
+            min-width: 180px;
+        }
+        .country-dropdown-small .dropdown-item {
+            color: #e5e5e5;
+            padding: 6px 15px;
+            font-size: 0.8rem;
+            cursor: pointer;
+        }
+        .country-dropdown-small .dropdown-item:hover { background: #c9a03d; color: #000; }
+        .user-btn { margin: 0 5px; }
+        .hero { min-height: 80vh; display: flex; align-items: center; text-align: center; }
+        .hero h2 { font-family: 'Cormorant Garamond', serif; font-size: 3.5rem; font-weight: 700; }
         .gold-text { color: #d4af37; }
         .product-card {
             background: rgba(17, 17, 17, 0.8);
@@ -129,177 +135,97 @@
             border: 1px solid rgba(201, 160, 61, 0.3);
         }
         .product-card:hover { transform: translateY(-8px); border-color: #c9a03d; }
-        .product-img { height: 280px; object-fit: cover; width: 100%; }
-        .product-price { font-size: 1.5rem; font-weight: 700; color: #d4af37; }
+        .product-img { height: 260px; object-fit: cover; width: 100%; }
+        .product-price { font-size: 1.3rem; font-weight: 700; color: #d4af37; }
         .add-to-cart {
             background: rgba(31,31,31,0.9);
             border: 1px solid #c9a03d;
             color: #c9a03d;
             width: 100%;
-            padding: 10px;
+            padding: 8px;
             border-radius: 40px;
             font-weight: 600;
+            font-size: 0.9rem;
         }
         .add-to-cart:hover { background: #c9a03d; color: #000; }
+        /* مودال تسجيل الدخول */
         .auth-modal {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.8);
-            backdrop-filter: blur(12px);
-            z-index: 2000;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            visibility: hidden;
-            opacity: 0;
-            transition: 0.25s;
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.8); backdrop-filter: blur(12px); z-index: 2000;
+            display: flex; align-items: center; justify-content: center;
+            visibility: hidden; opacity: 0; transition: 0.25s;
         }
         .auth-modal.active { visibility: visible; opacity: 1; }
         .auth-card {
-            background: rgba(10, 10, 20, 0.95);
-            backdrop-filter: blur(20px);
-            border-radius: 48px;
-            padding: 2rem;
-            width: 380px;
-            max-width: 90%;
-            border: 1px solid rgba(212, 175, 55, 0.5);
-            box-shadow: 0 25px 45px rgba(0,0,0,0.5);
-            text-align: center;
+            background: rgba(10, 10, 20, 0.95); backdrop-filter: blur(20px); border-radius: 48px;
+            padding: 1.8rem; width: 360px; max-width: 90%;
+            border: 1px solid rgba(212, 175, 55, 0.5); text-align: center;
         }
-        .auth-card input {
-            width: 100%;
-            padding: 12px;
-            margin: 10px 0;
-            background: rgba(255,255,255,0.1);
-            border: 1px solid #c9a03d;
-            border-radius: 60px;
-            color: white;
-        }
-        .auth-card button {
-            width: 100%;
-            padding: 12px;
-            margin-top: 10px;
-            background: #c9a03d;
-            border: none;
-            border-radius: 60px;
-            font-weight: bold;
-        }
-        .switch-auth { color: #c9a03d; cursor: pointer; margin-top: 15px; display: inline-block; }
-        
-        /* ====== خلفية سلة التسوق الذهبية الفاخرة ====== */
+        .auth-card input { width: 100%; padding: 10px; margin: 8px 0; background: rgba(255,255,255,0.1); border: 1px solid #c9a03d; border-radius: 60px; color: white; }
+        .auth-card button { width: 100%; padding: 10px; margin-top: 10px; background: #c9a03d; border: none; border-radius: 60px; font-weight: bold; }
+        .switch-auth { color: #c9a03d; cursor: pointer; margin-top: 12px; display: inline-block; font-size: 0.85rem; }
+        /* سلة التسوق بخلفية ذهبية */
         .cart-modal {
-            position: fixed;
-            top: 0;
-            right: -450px;
-            width: 420px;
-            height: 100%;
+            position: fixed; top: 0; right: -450px; width: 420px; height: 100%;
             background: radial-gradient(ellipse at top left, rgba(30, 20, 10, 0.98), rgba(10, 8, 5, 0.99));
-            backdrop-filter: blur(20px);
-            z-index: 1050;
-            transition: 0.35s;
-            border-left: 3px solid #d4af37;
-            display: flex;
-            flex-direction: column;
+            backdrop-filter: blur(20px); z-index: 1050; transition: 0.35s;
+            border-left: 3px solid #d4af37; display: flex; flex-direction: column;
             box-shadow: -10px 0 30px rgba(212, 175, 55, 0.3);
         }
         .cart-modal.open { right: 0; }
-        .cart-header {
-            background: linear-gradient(135deg, rgba(212, 175, 55, 0.2), rgba(0,0,0,0.5));
-            border-bottom: 2px solid #d4af37;
-        }
-        .cart-items {
-            flex: 1;
-            overflow-y: auto;
-            padding: 20px;
-            background: rgba(0,0,0,0.3);
-        }
-        .cart-item {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 18px;
-            border-bottom: 1px solid rgba(212, 175, 55, 0.3);
-            padding-bottom: 12px;
-            background: rgba(0,0,0,0.4);
-            border-radius: 16px;
-            padding: 12px;
-        }
-        .remove-item { cursor: pointer; color: #d4af37; transition: 0.2s; }
-        .remove-item:hover { color: #ffd700; transform: scale(1.1); }
-        .cart-total {
-            background: linear-gradient(90deg, rgba(212, 175, 55, 0.2), rgba(0,0,0,0.6));
-            border-top: 2px solid #d4af37;
-            font-weight: bold;
-            font-size: 1.3rem;
-            color: #ffd700;
-        }
-        .checkout-btn {
-            background: linear-gradient(95deg, #d4af37, #b8860b);
-            color: #0a0a0a;
-            border: none;
-            width: calc(100% - 40px);
-            margin: 0 20px 30px;
-            padding: 14px;
-            font-weight: bold;
-            border-radius: 40px;
-            transition: 0.2s;
-        }
-        .checkout-btn:hover {
-            transform: scale(1.02);
-            box-shadow: 0 0 15px rgba(212, 175, 55, 0.8);
-        }
+        .cart-header { background: linear-gradient(135deg, rgba(212, 175, 55, 0.2), rgba(0,0,0,0.5)); border-bottom: 2px solid #d4af37; padding: 15px; }
+        .cart-items { flex: 1; overflow-y: auto; padding: 15px; background: rgba(0,0,0,0.3); }
+        .cart-item { display: flex; justify-content: space-between; margin-bottom: 15px; border-bottom: 1px solid rgba(212, 175, 55, 0.3); padding: 10px; background: rgba(0,0,0,0.4); border-radius: 16px; }
+        .remove-item { cursor: pointer; color: #d4af37; }
+        .cart-total { background: linear-gradient(90deg, rgba(212, 175, 55, 0.2), rgba(0,0,0,0.6)); border-top: 2px solid #d4af37; padding: 15px; font-weight: bold; font-size: 1.2rem; color: #ffd700; }
+        .checkout-btn { background: linear-gradient(95deg, #d4af37, #b8860b); color: #0a0a0a; border: none; width: calc(100% - 30px); margin: 0 15px 25px; padding: 12px; font-weight: bold; border-radius: 40px; }
         .overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); backdrop-filter: blur(4px); z-index: 1040; visibility: hidden; opacity: 0; transition: 0.25s; }
         .overlay.active { visibility: visible; opacity: 1; }
         .music-player {
-            position: fixed; bottom: 25px; left: 25px; background: rgba(0,0,0,0.7); backdrop-filter: blur(12px);
-            border-radius: 60px; padding: 8px 20px; display: flex; align-items: center; gap: 12px; z-index: 1060;
-            border: 1px solid rgba(212, 175, 55, 0.7); cursor: pointer;
+            position: fixed; bottom: 20px; left: 20px; background: rgba(0,0,0,0.7); backdrop-filter: blur(12px);
+            border-radius: 50px; padding: 6px 16px; display: flex; align-items: center; gap: 8px; z-index: 1060;
+            border: 1px solid rgba(212, 175, 55, 0.7); cursor: pointer; font-size: 0.8rem;
         }
-        .toast-msg { position: fixed; bottom: 100px; left: 25px; background: #c9a03d; color: #0a0a0a; padding: 10px 20px; border-radius: 40px; z-index: 1100; opacity: 0; transition: 0.3s; pointer-events: none; }
-        @media (max-width: 768px) { .hero h2 { font-size: 2.5rem; } .cart-modal { width: 100%; right: -100%; } }
-        .dropdown-menu-custom {
-            background: #1a1a1a;
-            border: 1px solid #c9a03d;
-            border-radius: 20px;
-        }
-        .dropdown-item-custom {
-            color: #e5e5e5;
-            padding: 8px 20px;
-            cursor: pointer;
-        }
-        .dropdown-item-custom:hover {
-            background: #c9a03d;
-            color: #000;
+        .toast-msg { position: fixed; bottom: 80px; left: 20px; background: #c9a03d; color: #0a0a0a; padding: 8px 18px; border-radius: 40px; z-index: 1100; opacity: 0; transition: 0.3s; font-size: 0.85rem; }
+        @media (max-width: 768px) {
+            .hero h2 { font-size: 2.2rem; }
+            .cart-modal { width: 100%; right: -100%; }
+            .navbar .container { flex-wrap: wrap; gap: 10px; }
+            .btn-gold-small { padding: 4px 10px; font-size: 0.75rem; }
         }
     </style>
 </head>
 <body>
 
 <div class="top-bar text-center">
-    <div class="container d-flex justify-content-between align-items-center">
-        <div><i class="fas fa-shipping-fast me-2"></i> <span id="freeShippingText">توصيل مجاني للطلبات فوق 5000 درهم</span> | <i class="fas fa-gem"></i> <span id="exclusiveText">تشكيلة ZW-28-DZ الحصرية</span></div>
-        <div class="dropdown">
-            <button class="country-selector dropdown-toggle" type="button" id="countryDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                <i class="fas fa-globe"></i> <span id="selectedCountry">🇩🇿 الجزائر</span>
-            </button>
-            <ul class="dropdown-menu dropdown-menu-custom" aria-labelledby="countryDropdown">
-                <li class="dropdown-item-custom" data-country="dz" data-lang="ar" data-currency="DZD" data-symbol="د.ج" data-rate="1"><i class="fas fa-flag-checkered"></i> 🇩🇿 الجزائر - العربية (دينار)</li>
-                <li class="dropdown-item-custom" data-country="us" data-lang="en" data-currency="USD" data-symbol="$" data-rate="0.0037"><i class="fas fa-flag-checkered"></i> 🇺🇸 USA - English (Dollar)</li>
-                <li class="dropdown-item-custom" data-country="fr" data-lang="fr" data-currency="EUR" data-symbol="€" data-rate="0.0034"><i class="fas fa-flag-checkered"></i> 🇫🇷 France - Français (Euro)</li>
-            </ul>
-        </div>
+    <div class="container">
+        <i class="fas fa-shipping-fast me-2"></i> <span id="freeShippingText">توصيل مجاني للطلبات فوق 5000 درهم</span> | <i class="fas fa-gem"></i> <span id="exclusiveText">تشكيلة ZW-28-DZ الحصرية</span>
     </div>
 </div>
 
 <nav class="navbar sticky-top">
-    <div class="container d-flex justify-content-between align-items-center">
-        <div class="logo"><h1>ZW-28-DZ</h1><span>L'ATELIER D'EXCEPTION</span></div>
-        <div class="d-flex align-items-center gap-4">
+    <div class="container d-flex justify-content-between align-items-center flex-wrap">
+        <div class="logo">
+            <h1>ZW-28-DZ</h1>
+            <span>L'ATELIER D'EXCEPTION</span>
+        </div>
+        <div class="d-flex align-items-center gap-2 gap-md-3">
             <a href="#" class="text-decoration-none text-white-50 d-none d-md-block" id="collectionLink">المجموعة</a>
             <a href="#" class="text-decoration-none text-white-50 d-none d-md-block" id="limitedLink">إصدارات محدودة</a>
-            <div id="authBtn" class="btn-gold rounded-pill px-3 py-1" style="cursor:pointer;"><i class="fas fa-user"></i> <span id="userNameDisplay">تسجيل الدخول</span></div>
+            
+            <!-- خانة تغيير البلد (لغة وعملة) صغيرة -->
+            <div class="dropdown country-dropdown-small">
+                <button class="btn-gold-small dropdown-toggle" type="button" id="countrySmallDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="fas fa-globe"></i> <span id="selectedCountrySmall">🇩🇿</span>
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="countrySmallDropdown">
+                    <li class="dropdown-item" data-country="dz" data-lang="ar" data-currency="DZD" data-symbol="د.ج" data-rate="1">🇩🇿 الجزائر - دينار</li>
+                    <li class="dropdown-item" data-country="us" data-lang="en" data-currency="USD" data-symbol="$" data-rate="0.0037">🇺🇸 USA - Dollar</li>
+                    <li class="dropdown-item" data-country="fr" data-lang="fr" data-currency="EUR" data-symbol="€" data-rate="0.0034">🇫🇷 France - Euro</li>
+                </ul>
+            </div>
+            
+            <div id="authBtn" class="btn-gold-small user-btn" style="cursor:pointer;"><i class="fas fa-user"></i> <span id="userNameDisplay">تسجيل الدخول</span></div>
             <div class="cart-icon" id="cartIcon"><i class="fas fa-shopping-bag"></i><span class="cart-count" id="cartCount">0</span></div>
         </div>
     </div>
@@ -310,16 +236,16 @@
         <div class="row justify-content-center">
             <div class="col-lg-8">
                 <h2 class="mb-3"><span id="heroTitle1">أرقى الإصدارات</span> <span class="gold-text">ZW-28-DZ</span></h2>
-                <p class="mb-5 lead" id="heroDesc">ساعات و إكسسوارات فاخرة – كل قطعة تحمل رمز الندرة والأناقة</p>
-                <a href="#products" class="btn btn-gold px-5 py-3" id="discoverBtn">اكتشف التشكيلة <i class="fas fa-arrow-left me-2"></i></a>
+                <p class="mb-4 lead" id="heroDesc">ساعات و إكسسوارات فاخرة – كل قطعة تحمل رمز الندرة والأناقة</p>
+                <a href="#products" class="btn btn-gold-small px-4 py-2" id="discoverBtn">اكتشف التشكيلة <i class="fas fa-arrow-left me-1"></i></a>
             </div>
         </div>
     </div>
 </section>
 
 <section id="products" class="py-5">
-    <div class="container py-4">
-        <div class="text-center mb-5"><span class="small text-uppercase" id="exclusiveBadge">مقتنيات حصرية</span><h2 class="mt-2" style="font-family:'Cormorant Garamond'; font-size:2.8rem; border-right:4px solid #c9a03d; padding-right:20px; display:inline-block;" id="latestTitle">أحدث القطع الفاخرة</h2></div>
+    <div class="container py-3">
+        <div class="text-center mb-4"><span class="small text-uppercase" id="exclusiveBadge">مقتنيات حصرية</span><h2 class="mt-2" style="font-family:'Cormorant Garamond'; font-size:2.5rem; border-right:4px solid #c9a03d; padding-right:15px; display:inline-block;" id="latestTitle">أحدث القطع الفاخرة</h2></div>
         <div class="row g-4" id="productsContainer"></div>
     </div>
 </section>
@@ -327,7 +253,7 @@
 <!-- مودال تسجيل الدخول -->
 <div id="authModal" class="auth-modal">
     <div class="auth-card">
-        <i class="fas fa-crown" style="font-size: 2rem; color: #d4af37;"></i>
+        <i class="fas fa-crown" style="font-size: 1.8rem; color: #d4af37;"></i>
         <h3 class="mt-2" id="authTitle">تسجيل الدخول</h3>
         <input type="text" id="authName" placeholder="الاسم الكامل" style="display: none;">
         <input type="email" id="authEmail" placeholder="البريد الإلكتروني">
@@ -338,12 +264,12 @@
     </div>
 </div>
 
-<!-- سلة التسوق بخلفية ذهبية -->
+<!-- سلة التسوق -->
 <div class="overlay" id="cartOverlay"></div>
 <div class="cart-modal" id="cartModal">
-    <div class="cart-header d-flex justify-content-between p-3"><h5 id="cartTitle"><i class="fas fa-shopping-bag"></i> سلتي الفاخرة</h5><i class="fas fa-times fs-4" id="closeCartBtn" style="cursor:pointer;"></i></div>
+    <div class="cart-header d-flex justify-content-between"><h5 id="cartTitle"><i class="fas fa-shopping-bag"></i> سلتي الفاخرة</h5><i class="fas fa-times fs-5" id="closeCartBtn" style="cursor:pointer;"></i></div>
     <div class="cart-items" id="cartItemsList">سلة فارغة</div>
-    <div class="cart-total d-flex justify-content-between p-3"><span id="totalLabel">المجموع</span><span id="cartTotalAmount">0 درهم</span></div>
+    <div class="cart-total d-flex justify-content-between"><span id="totalLabel">المجموع</span><span id="cartTotalAmount">0 درهم</span></div>
     <button class="checkout-btn" id="checkoutBtn">إتمام الشراء</button>
 </div>
 
@@ -363,9 +289,9 @@
     ];
 
     const countries = {
-        dz: { lang: "ar", currency: "DZD", symbol: "د.ج", rate: 1, name: "🇩🇿 الجزائر", dir: "rtl" },
-        us: { lang: "en", currency: "USD", symbol: "$", rate: 0.0037, name: "🇺🇸 USA", dir: "ltr" },
-        fr: { lang: "fr", currency: "EUR", symbol: "€", rate: 0.0034, name: "🇫🇷 France", dir: "ltr" }
+        dz: { lang: "ar", currency: "DZD", symbol: "د.ج", rate: 1, name: "🇩🇿", dir: "rtl" },
+        us: { lang: "en", currency: "USD", symbol: "$", rate: 0.0037, name: "🇺🇸", dir: "ltr" },
+        fr: { lang: "fr", currency: "EUR", symbol: "€", rate: 0.0034, name: "🇫🇷", dir: "ltr" }
     };
 
     let currentCountry = "dz";
@@ -424,7 +350,7 @@
         if (!currentUser) document.getElementById("userNameDisplay").innerText = t.login;
         document.getElementById("heroTitle1").innerText = t.heroTitle;
         document.getElementById("heroDesc").innerText = t.heroDesc;
-        document.getElementById("discoverBtn").innerHTML = t.discover + ' <i class="fas fa-arrow-left me-2"></i>';
+        document.getElementById("discoverBtn").innerHTML = t.discover + ' <i class="fas fa-arrow-left me-1"></i>';
         document.getElementById("exclusiveBadge").innerText = t.exclusiveBadge;
         document.getElementById("latestTitle").innerText = t.latestTitle;
         document.getElementById("cartTitle").innerHTML = '<i class="fas fa-shopping-bag"></i> ' + t.cart;
@@ -437,7 +363,7 @@
         document.getElementById("authActionBtn").innerText = isLoginMode ? t.loginBtn : t.registerBtn;
         document.getElementById("toggleAuthText").innerText = isLoginMode ? t.authToggleLogin : t.authToggleRegister;
         document.getElementById("closeAuthModal").innerText = t.close;
-        document.getElementById("selectedCountry").innerHTML = countries[currentCountry].name;
+        document.getElementById("selectedCountrySmall").innerHTML = countries[currentCountry].name;
         document.getElementById("musicStatus").innerText = isPlaying ? t.musicPlaying : t.musicPlay;
         renderProducts();
         updateCartUI();
@@ -453,7 +379,7 @@
             const convertedPrice = convertPrice(p.priceDZD);
             const productName = p.name[currentLang] || p.name.ar;
             const productDesc = p.desc[currentLang] || p.desc.ar;
-            cards += `<div class="col-lg-4 col-md-6"><div class="product-card h-100"><img src="${p.img}" class="product-img"><div class="p-4"><h5>${productName}</h5><p class="small">${productDesc}</p><div class="d-flex justify-content-between"><span class="product-price">${formatPrice(convertedPrice)}</span><button class="add-to-cart" data-id="${p.id}" data-name="${productName}" data-price="${convertedPrice}"><i class="fas fa-plus-circle"></i> ${translations[currentLang].addToCart}</button></div></div></div></div>`;
+            cards += `<div class="col-lg-4 col-md-6"><div class="product-card h-100"><img src="${p.img}" class="product-img"><div class="p-3"><h5>${productName}</h5><p class="small">${productDesc}</p><div class="d-flex justify-content-between align-items-center"><span class="product-price">${formatPrice(convertedPrice)}</span><button class="add-to-cart" data-id="${p.id}" data-name="${productName}" data-price="${convertedPrice}"><i class="fas fa-plus-circle"></i> ${translations[currentLang].addToCart}</button></div></div></div></div>`;
         });
         container.innerHTML = cards;
         document.querySelectorAll(".add-to-cart").forEach(btn => {
@@ -507,7 +433,7 @@
     function updateCartUI() {
         const container = document.getElementById("cartItemsList");
         const totalSpan = document.getElementById("cartTotalAmount");
-        if (cart.length === 0) { container.innerHTML = `<div class="text-center py-5">${translations[currentLang].emptyCart}</div>`; totalSpan.innerText = "0 " + currentSymbol; return; }
+        if (cart.length === 0) { container.innerHTML = `<div class="text-center py-4">${translations[currentLang].emptyCart}</div>`; totalSpan.innerText = "0 " + currentSymbol; return; }
         let html = '', total = 0;
         cart.forEach(item => { total += item.price * item.quantity; html += `<div class="cart-item"><div><h6>${item.name}</h6><small>الكمية: ${item.quantity}</small><div class="gold-text">${formatPrice(item.price * item.quantity)}</div></div><div class="remove-item" data-id="${item.id}"><i class="fas fa-trash-alt"></i></div></div>`; });
         container.innerHTML = html; totalSpan.innerText = formatPrice(total);
@@ -585,8 +511,8 @@
     musicBtn.onclick = () => isPlaying ? pauseMusic() : playMusic();
     document.addEventListener("click", function firstClick() { if (!isPlaying) playMusic(); document.removeEventListener("click", firstClick); });
 
-    // مستمع تغيير البلد
-    document.querySelectorAll(".dropdown-item-custom").forEach(item => {
+    // مستمع تغيير البلد من القائمة الصغيرة
+    document.querySelectorAll(".country-dropdown-small .dropdown-item").forEach(item => {
         item.addEventListener("click", () => { setCountry(item.getAttribute("data-country")); });
     });
 
